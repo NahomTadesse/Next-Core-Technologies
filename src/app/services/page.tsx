@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import { getServices } from '../service/servicesApi';
 import { fetchCards } from '../service/contactService'; // Reuse from contact service
 import { XMarkIcon, CheckCircleIcon, ClockIcon, ShieldCheckIcon, SparklesIcon, BoltIcon, ScaleIcon } from '@heroicons/react/24/outline';
-
+// Add the missing import for DocumentTextIcon at the top
+import { DocumentTextIcon } from '@heroicons/react/24/outline';
 export default function Services() {
   const [services, setServices] = useState([]);
   const [cards, setCards] = useState([]);

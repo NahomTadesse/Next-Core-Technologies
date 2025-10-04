@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { fetchProducts } from '../service/productService'; // Adjust the path as needed
 import { fetchCards } from '../service/contactService'; // Reuse from contact service
 import { XMarkIcon, EyeIcon, CogIcon, CodeBracketIcon, ShieldCheckIcon, SparklesIcon, BoltIcon, ScaleIcon, StarIcon } from '@heroicons/react/24/outline';
-
+// Add the missing import for CheckCircleIcon at the top
+import { CheckCircleIcon } from '@heroicons/react/24/outline';
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
