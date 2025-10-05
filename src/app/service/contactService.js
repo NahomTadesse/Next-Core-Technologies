@@ -1,6 +1,6 @@
 // lib/services/contactService.js
-const API_BASE = 'https://cms-phl1z345y-kidus2s-projects.vercel.app';
-const SUBMIT_URL = 'https://cms-phl1z345y-kidus2s-projects.vercel.app/api/contacts/submit';
+const API_BASE = 'https://cms-89ymw0xak-kidus2s-projects.vercel.app';
+const SUBMIT_URL = 'https://cms-89ymw0xak-kidus2s-projects.vercel.app/api/contacts/submit';
 
 
 export async function fetchCompanyInfo() {

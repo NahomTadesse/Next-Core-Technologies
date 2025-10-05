@@ -1,5 +1,5 @@
 // lib/services/homeService.js
-const API_BASE = 'https://cms-phl1z345y-kidus2s-projects.vercel.app';
+const API_BASE = 'https://cms-89ymw0xak-kidus2s-projects.vercel.app';
 
 export async function fetchHomeData() {
   try {

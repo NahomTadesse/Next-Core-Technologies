@@ -3,7 +3,7 @@
 export const fetchProducts = async (page = 1) => {
   try {
     const response = await fetch(
-      `https://cms-phl1z345y-kidus2s-projects.vercel.app/api/products`,
+      `https://cms-89ymw0xak-kidus2s-projects.vercel.app/api/products`,
       {
         method: 'GET',
         headers: {
