@@ -157,7 +157,7 @@ export default function Insights() {
               </div>
               <h3 className="font-bold text-xl mb-3 text-orange-700 dark:text-orange-400 group-hover:underline underline-offset-4 text-center">Latest Article</h3>
               <blockquote className="text-neutral-600 dark:text-neutral-300 text-base text-center italic border-l-4 border-orange-400 pl-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                "Coming soon: actionable insights and stories from our team."
+               {'"Coming soon: actionable insights and stories from our team."'}
               </blockquote>
             </div>
           </div>
@@ -169,7 +169,7 @@ export default function Insights() {
               </div>
               <h3 className="font-bold text-xl mb-3 text-emerald-700 dark:text-emerald-400 group-hover:underline underline-offset-4 text-center">How we deliver</h3>
               <blockquote className="text-neutral-600 dark:text-neutral-300 text-base text-center italic border-l-4 border-emerald-400 pl-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                "Discovery → Implementation → AMS - a clear path. Small, certain wins compound. Confidence you can defend in the boardroom."
+                {'"Discovery → Implementation → AMS - a clear path. Small, certain wins compound. Confidence you can defend in the boardroom."'}
               </blockquote>
             </div>
           </div>

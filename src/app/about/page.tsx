@@ -1,15 +1,53 @@
 "use client"
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, JSXElementConstructor, ReactElement, ReactNode, ReactPortal } from 'react';
 import { fetchAbout } from '../service/aboutService';
 import { fetchCards } from '../service/contactService'; // Reuse from contact service
 import { XMarkIcon, StarIcon, UsersIcon, DocumentTextIcon, ChatBubbleLeftIcon, BuildingOfficeIcon, LightBulbIcon, HeartIcon } from '@heroicons/react/24/outline';
 
 export default function About() {
-  const [aboutData, setAboutData] = useState(null);
-  const [cards, setCards] = useState([]);
-  const [loading, setLoading] = useState(true);
 
+ 
+  const [loading, setLoading] = useState(true);
+interface Card {
+  type: string;
+  isActive: boolean;
+  title?: string;
+  description?: string;
+  features?: string[];
+  buttonText?: string;
+  buttonLink?: string;
+}
+interface AboutData {
+  heroImage: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  tagline: string;
+  story: string;
+  mission: string;
+  vision: string;
+  values: {
+    _id: string;
+    icon: string;
+    title: string;
+    description: string;
+  }[];
+  achievements: {
+    _id: string;
+    number: number;
+    suffix?: string;
+    label: string;
+  }[];
+  projectsCompleted: number;
+  employeesCount: number;
+  ctaTitle: string;
+  ctaDescription: string;
+  ctaButtonText: string;
+  ctaButtonLink: string;
+}
+const [aboutData, setAboutData] = useState<AboutData | null>(null);
+
+const [cards, setCards] = useState<Card[]>([]);
   useEffect(() => {
     const loadData = async () => {
       setLoading(true);
@@ -46,19 +84,33 @@ export default function About() {
 
   const aboutCard = cards.find(card => card.type === 'about' && card.isActive);
 
-  // Icon mapping for values (extend as needed; fallback to text/emoji)
-  const getValueIcon = (icon) => {
-    const icons = {
-      star: <StarIcon className="w-6 h-6" />,
-      users: <UsersIcon className="w-6 h-6" />,
-      document: <DocumentTextIcon className="w-6 h-6" />,
-      chat: <ChatBubbleLeftIcon className="w-6 h-6" />,
-      building: <BuildingOfficeIcon className="w-6 h-6" />,
-      lightbulb: <LightBulbIcon className="w-6 h-6" />,
-      heart: <HeartIcon className="w-6 h-6" />,
-    };
-    return icons[icon] || <span className="text-xl">{icon}</span>; // Fallback to original emoji/text
+  // // Icon mapping for values (extend as needed; fallback to text/emoji)
+  // const getValueIcon = (icon: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined) => {
+  //   const icons = {
+  //     star: <StarIcon className="w-6 h-6" />,
+  //     users: <UsersIcon className="w-6 h-6" />,
+  //     document: <DocumentTextIcon className="w-6 h-6" />,
+  //     chat: <ChatBubbleLeftIcon className="w-6 h-6" />,
+  //     building: <BuildingOfficeIcon className="w-6 h-6" />,
+  //     lightbulb: <LightBulbIcon className="w-6 h-6" />,
+  //     heart: <HeartIcon className="w-6 h-6" />,
+  //   };
+  //   return icons[icon] || <span className="text-xl">{icon}</span>; // Fallback to original emoji/text
+  // };
+
+  const getValueIcon = (icon: string) => {
+  const icons: Record<string, React.ReactNode> = {
+    star: <StarIcon className="w-6 h-6" />,
+    users: <UsersIcon className="w-6 h-6" />,
+    document: <DocumentTextIcon className="w-6 h-6" />,
+    chat: <ChatBubbleLeftIcon className="w-6 h-6" />,
+    building: <BuildingOfficeIcon className="w-6 h-6" />,
+    lightbulb: <LightBulbIcon className="w-6 h-6" />,
+    heart: <HeartIcon className="w-6 h-6" />,
   };
+
+  return icons[icon] || <span className="text-xl">{icon}</span>; // fallback
+};
 
   return (
     <section className="w-full flex flex-col items-center px-4 pt-16 pb-24 min-h-screen bg-gradient-to-br from-[#e0e7ff] via-[#f0f4ff] to-[#c7d2fe] dark:from-[#0a0a23] dark:via-[#1e293b] dark:to-[#0a0a23] overflow-hidden">
@@ -195,7 +247,7 @@ export default function About() {
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-4 text-blue-700 dark:text-blue-400">{aboutCard.title}</h2>
             <p className="text-neutral-700 dark:text-neutral-300 mb-6 text-base leading-relaxed max-w-3xl mx-auto">{aboutCard.description}</p>
-            {aboutCard.features?.length > 0 && (
+            {aboutCard.features && aboutCard.features.length > 0 && (
               <div className="grid grid-cols-1 gap-4 mb-6">
                 {aboutCard.features.map((feature, idx) => (
                   <div key={idx} className="flex items-center gap-3 p-3 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg">
