@@ -69,7 +69,7 @@ export default function Home() {
       {/* Hero Section - Enhanced with animations */}
       <div className="max-w-5xl text-center mb-20 animate-fade-in-up">
         <h1 className="text-5xl sm:text-7xl font-extrabold mb-6 leading-tight tracking-tight text-neutral-900 dark:text-white drop-shadow-xl bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent">
-          {homeData?.hero?.title || 'Welcome to Our Platform'}
+          {homeData?.hero?.title }
         </h1>
         {homeData?.hero?.subtitle && (
           <p className="text-2xl sm:text-3xl font-semibold mb-4 text-blue-700 dark:text-blue-400 animate-fade-in-up animation-delay-200">
@@ -77,7 +77,7 @@ export default function Home() {
           </p>
         )}
         <p className="text-xl sm:text-2xl text-neutral-700 dark:text-neutral-300 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-400">
-          {homeData?.hero?.description || 'We create innovative solutions that drive business growth and deliver exceptional user experiences.'}
+          {homeData?.hero?.description }
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 animate-fade-in-up animation-delay-600">
           <a 

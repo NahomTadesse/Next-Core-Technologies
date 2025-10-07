@@ -1,3 +1,6 @@
+
+
+
 'use client'
 import { useState, useEffect } from 'react';
 import { fetchCompanyInfo, fetchCards, submitContactForm } from '../service/contactService';
@@ -72,7 +75,7 @@ export default function Contact() {
     setTimeout(() => setFormStatus(null), 5000);
   };
 
-  const contactCard = cards.find(card => card.type === 'contact' && card.isActive);
+  const contactCards = cards.filter(card => card.type === 'contact' && card.isActive);
 
   if (loading) {
     return (
@@ -94,35 +97,41 @@ export default function Contact() {
         </p>
       </div>
 
-      {/* Contact Card if exists - Full width with breathing room and glow */}
-      {contactCard && (
-        <div className="max-w-7xl w-full mb-20 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 lg:p-12 border border-white/20 hover:border-blue-400/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-blue-500/20 transition-all duration-700 animate-slide-in-up animation-delay-200">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6 text-blue-700 dark:text-blue-400">{contactCard.title}</h2>
-            <p className="text-neutral-700 dark:text-neutral-300 mb-8 text-lg leading-relaxed">{contactCard.description}</p>
-            {contactCard.features?.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                {contactCard.features.map((feature, idx) => (
-                  <div key={idx} className="flex items-start gap-3 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl">
-                    <svg className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{feature}</span>
-                  </div>
-                ))}
+      {/* Contact Cards - Full width grid with breathing room and glow */}
+      {contactCards.length > 0 && (
+        <div className="max-w-7xl w-full mb-20 animate-fade-in-up animation-delay-200">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {contactCards.map((contactCard, idx) => (
+              <div key={contactCard._id} className="bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 lg:p-12 border border-white/20 hover:border-blue-400/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-blue-500/20 transition-all duration-700" style={{ animationDelay: `${idx * 150}ms` }}>
+                <div className="max-w-4xl mx-auto text-center">
+                  <h2 className="text-3xl font-bold mb-6 text-blue-700 dark:text-blue-400">{contactCard.title}</h2>
+                  <p className="text-neutral-700 dark:text-neutral-300 mb-8 text-lg leading-relaxed">{contactCard.description}</p>
+                  {contactCard.features?.length > 0 && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                      {contactCard.features.map((feature, featureIdx) => (
+                        <div key={featureIdx} className="flex items-start gap-3 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl">
+                          <svg className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                          <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {contactCard.buttonText && (
+                    <a
+                      href={contactCard.buttonLink}
+                      className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition-all duration-300"
+                    >
+                      {contactCard.buttonText}
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
               </div>
-            )}
-            {contactCard.buttonText && (
-              <a
-                href={contactCard.buttonLink}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition-all duration-300"
-              >
-                {contactCard.buttonText}
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-            )}
+            ))}
           </div>
         </div>
       )}
